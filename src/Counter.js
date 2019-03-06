@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+
+import { INCREMENT, DECREMENT } from './ducks/counter'
 
 class Counter extends Component {
   render() {
     return (
       <div className="app">
         <section className="counter">
-          <h1 className="counter__current-value">{0}</h1>
+          <h1 className="counter__current-value">{this.props.currentValue}</h1>
           <div className="counter__button-wrapper">
             <button
               className="counter__button increment-one"
-              onClick={() => null}
+              onClick={() => this.props.dispatch({type: INCREMENT})}
             >
               +1
             </button>
@@ -21,7 +24,7 @@ class Counter extends Component {
             </button>
             <button
               className="counter__button decrement-one"
-              onClick={() => null}
+              onClick={() => this.props.dispatch({type: DECREMENT})}
             >
               -1
             </button>
@@ -56,4 +59,7 @@ class Counter extends Component {
   }
 }
 
-export default Counter;
+
+export default connect((state) => {
+  return state;
+})(Counter);
